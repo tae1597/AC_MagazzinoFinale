@@ -1,4 +1,3 @@
--- Script di creazione del database per il gestionale magazzino
 
 CREATE DATABASE IF NOT EXISTS gestionale_magazzino;
 
