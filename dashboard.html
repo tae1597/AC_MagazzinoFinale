@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dashboard Magazzino</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <h1>Scorte Magazzino</h1>
+    <canvas id="stockChart"></canvas>
+    <script>
+        fetch('/dashboard/scorte')
+            .then(response => response.json())
+            .then(data => {
+                const labels = data.map(item => item.prodotto.nome);
+                const quantities = data.map(item => item.quantita);
+
+                new Chart(document.getElementById('stockChart'), {
+                    type: 'bar',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            label: 'Quantità in Magazzino',
+                            data: quantities,
+                            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                            borderColor: 'rgba(75, 192, 192, 1)',
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+            });
+    </script>
+</body>
+</html>
